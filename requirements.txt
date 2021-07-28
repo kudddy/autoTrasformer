@@ -1,0 +1,5 @@
+aiohttp~=3.7.1
+aiohttp_apispec
+aiohttp_cors
+pyyaml
+asyncpg~=0.22.0

@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: duckling-backend-deployment
+  labels:
+    app: ducklingbackend
+spec:
+  selector:
+    matchLabels:
+      app: ducklingbackend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ducklingbackend
+        tier: memcached
+    spec:
+      containers:
+      - name: ducklingbackend
+        image: docker.io/kudddy/autotrasformer
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
