@@ -5,6 +5,8 @@ from aiohttp_apispec import docs, response_schema
 
 from .base import BaseView
 
+from plugins.helper import get_cars_from_sberauto, parse_response, generate_url
+
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
@@ -20,7 +22,6 @@ class PredictionHandler(BaseView):
     # @response_schema(description="Возвращает n число ближайших соседей токена"
     #                              "сортированные по дате")
     async def post(self):
-        status: bool = True
         result: dict = {}
 
         res: dict = await self.request.json()
@@ -30,12 +31,27 @@ class PredictionHandler(BaseView):
         try:
             logging.info("message_name - %r info - %r", "GET_DUCKLING_RESULT", "token - {}".format(text))
             # TODO логка реализации duckling и тд. пока формируем заглушку
-            result = self.model().get_struct_info()
+            # TODO должен вернуть brand_id, model_id, city_id
+            brand_id, city_id = self.model().get_struct_info()
+
+            response = await get_cars_from_sberauto(brand_id=brand_id, city_id=city_id)
+
+            status, min_price, max_price, count = parse_response(response)
+
+            if status:
+                done_url = generate_url(brand_id, city_id)
+            else:
+                done_url = None
 
             return Response(body={"MESSAGE_NAME": "GET_DUCKLING_RESULT",
                                   "STATUS": status,
                                   "PAYLOAD": {
-                                      "result": result,
+                                      "result": {
+                                          "min_price": min_price,
+                                          "max_price": max_price,
+                                          "count": count,
+                                          "url": done_url
+                                      },
                                       "description": "OK"
                                   }})
         except Exception as e:
