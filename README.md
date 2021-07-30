@@ -41,8 +41,10 @@ localhost:8080/getnearesttoken/
     "STATUS": true,
     "PAYLOAD": {
         "result": {
-            "brand_id": 48,
-            "city_id": 1
+            "min_price": 17170436,
+            "max_price": 887000,
+            "count": 100,
+            "url": "https://sberauto.com/cars?brand=48&city=1&rental_car=exclude_rental"
         },
         "description": "OK"
     }
