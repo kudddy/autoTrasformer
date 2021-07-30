@@ -5,3 +5,5 @@ app:
   directory:
     model_path: persistant/w2v/model_hh_fasttext
     stop_words_path: persistant/stopwords.txt
+  url:
+    sberautogetcars: https://api.sberauto.com/searcher/getCars
