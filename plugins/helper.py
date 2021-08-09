@@ -49,13 +49,13 @@ async def get_search_res_yandex(text: str):
     # мапим название яндекса на id сберавто
     # TODO поправить неправильное обозначение
     if mark:
-        mark = models[mark]
+        mark = models.get(mark, False)
 
     if model:
-        model = marks[model]
-
+        model = marks.get(model, False)
+    # TODO подумать насчет того что в яндексе больше индексов
     if city_id:
-        city_id = citys[city_id]
+        city_id = citys.get(city_id, False)
 
     return mark, model, city_id, year_from, year_to
 
