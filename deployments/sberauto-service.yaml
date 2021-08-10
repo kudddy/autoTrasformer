@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sberautoru
+spec:
+  type: ExternalName
+  externalName: api.sberauto.com
