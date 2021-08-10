@@ -1,13 +1,19 @@
+import logging
 from aiohttp_requests import requests
 from json import dumps
 
 from persistants.request_info import headers_auto_ru, headers_sberauto
 from plugins.loader import marks, models, citys
+from plugins.config import cfg
 
-# TODO вынести в конфиг
-url = "https://api.sberauto.com/searcher/getCars"
+url = cfg.app.url.sberautogetcars
 
-url_auto_ru: str = "https://auto.ru/-/ajax/desktop/searchlineSuggest/"
+url_auto_ru: str = cfg.app.url.autoru
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
+log.setLevel(logging.INFO)
 
 
 async def get_resp_from_yandex_systems(payload: dict):
@@ -15,6 +21,11 @@ async def get_resp_from_yandex_systems(payload: dict):
                                    headers=headers_auto_ru,
                                    data=dumps(payload),
                                    ssl=False)
+
+    res = await response.text()
+
+    logging.info("request info from yandex - {}".format(res))
+
     d = await response.json()
 
     return d

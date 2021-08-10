@@ -34,7 +34,6 @@ class YdxSearchEngine(BaseView):
             # TODO подумать насчет этого условия
 
             if brand_id or model_id or city_id:
-                print("тут - get_cars_from_sberauto")
                 response = await get_cars_from_sberauto(brand_id=brand_id,
                                                         city_id=city_id,
                                                         model_id=model_id,
