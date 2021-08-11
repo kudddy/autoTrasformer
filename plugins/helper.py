@@ -140,8 +140,8 @@ def parse_response(resp: dict):
 
     if data and len(search_res) > 0:
         prices = [x['price'] for x in search_res]
-        min_price = max(prices)
-        max_price = min(prices)
+        min_price = min(prices)
+        max_price = max(prices)
         count = len(prices)
         status = True
     else:
