@@ -2,10 +2,11 @@ import logging
 import asyncio
 
 from aiohttp.web_response import Response
-from aiohttp_apispec import docs, response_schema
+from aiohttp_apispec import docs
 from asyncio import get_event_loop
 
-from plugins.helper import get_cars_from_sberauto, parse_response, generate_url, get_search_res_yandex
+from plugins.responder.sberauto import get_cars_from_sberauto, parse_response, generate_url
+from plugins.responder.autoru import get_search_res_yandex
 from plugins.duckling.typonder import replace_typos
 
 from .base import BaseView
@@ -46,6 +47,12 @@ class YdxSearchEngine(BaseView):
             logging.info("message_name - %r info - %r", "GET_DUCKLING_RESULT", "token - {}".format(text))
 
             brand_id, model_id, city_id, year_from, year_to = await get_search_res_yandex(text)
+
+            print(brand_id)
+            print(model_id)
+            print(city_id)
+            print(year_from)
+            print(year_to)
 
             # TODO подумать насчет этого условия
 
