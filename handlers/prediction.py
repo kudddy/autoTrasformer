@@ -5,8 +5,7 @@ from aiohttp_apispec import docs, response_schema
 
 from .base import BaseView
 
-from plugins.helper import get_cars_from_sberauto, parse_response, generate_url
-
+from plugins.responder.sberauto import generate_url, get_cars_from_sberauto, parse_response
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
