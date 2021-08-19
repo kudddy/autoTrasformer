@@ -8,3 +8,4 @@ app:
   url:
     sberautogetcars: https://api.sberauto.com/searcher/getCars
     autoru: https://auto.ru/-/ajax/desktop/searchlineSuggest/
+  token: ad7f8ba8-000b-11ec-9a03-0242ac130003
