@@ -6,14 +6,14 @@ from aiohttp_requests import requests
 from plugins.config import cfg
 from plugins.loader import marks, models, citys
 from plugins.helper import is_true
-from persistants.request_info import headers_auto_ru
+from persistants.request_info import headers_auto_ru, mixer_headers_auto_ru
 
 url_auto_ru: str = cfg.app.url.autoru
 
 
 async def get_resp_from_yandex_systems(payload: dict):
     response = await requests.post(url_auto_ru,
-                                   headers=headers_auto_ru,
+                                   headers=mixer_headers_auto_ru(),
                                    data=dumps(payload),
                                    ssl=False)
 
