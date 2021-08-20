@@ -48,28 +48,20 @@ class YdxSearchEngine(BaseView):
 
             brand_id, model_id, city_id, year_from, year_to = await get_search_res_yandex(text)
 
-            print(brand_id)
-            print(model_id)
-            print(city_id)
-            print(year_from)
-            print(year_to)
-
             # TODO подумать насчет этого условия
 
             if brand_id or model_id or city_id:
                 # запускаем локальный цикл событий
 
-                loop_local = get_event_loop()
-
                 async_tasks = []
                 for page in range(30):
-                    async_tasks.append(loop_local.create_task(
-                        get_cars_from_sberauto(brand_id=brand_id,
-                                               city_id=city_id,
-                                               model_id=model_id,
-                                               year_from=year_from,
-                                               year_to=year_to,
-                                               page=page)
+                    async_tasks.append(get_cars_from_sberauto(
+                        brand_id=brand_id,
+                        city_id=city_id,
+                        model_id=model_id,
+                        year_from=year_from,
+                        year_to=year_to,
+                        page=page
                     ))
 
                 responses = await asyncio.gather(*async_tasks)
@@ -93,7 +85,6 @@ class YdxSearchEngine(BaseView):
 
             status, min_price, middle_value, max_price, count = parse_response(all_responses)
 
-            # TODO возможно стоит сделать посимпатичней
             if status:
                 done_url = generate_url(brand_id,
                                         city_id,
@@ -102,8 +93,6 @@ class YdxSearchEngine(BaseView):
                                         year_to)
             else:
                 done_url = "https://sberauto.com/cars?"
-
-            print(done_url)
 
             return Response(body={"MESSAGE_NAME": "GET_DUCKLING_RESULT",
                                   "STATUS": status,
