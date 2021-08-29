@@ -80,20 +80,20 @@ def generate_url(brand_id: int,
     # генерация ссылки относительно входящий параметов
     if brand_id and city_id and model_id:
         city_str = generate_city_str(city_id)
-        done_url = "https://sberauto.com/cars?brand={}=model={}&rental_car=exclude_rental{}".format(brand_id,
+        done_url = "https://sberauto.com/app/cars?brand={}=model={}&rental_car=exclude_rental{}".format(brand_id,
                                                                                                     model_id,
                                                                                                     city_str)
     elif brand_id and model_id:
-        done_url = "https://sberauto.com/cars?brand={}=model={}&rental_car=exclude_rental".format(brand_id,
+        done_url = "https://sberauto.com/app/cars?brand={}=model={}&rental_car=exclude_rental".format(brand_id,
                                                                                                   model_id)
     elif brand_id and city_id:
         city_str = generate_city_str(city_id)
-        done_url = "https://sberauto.com/cars?brand={}{}&rental_car=exclude_rental".format(brand_id,
+        done_url = "https://sberauto.com/app/cars?brand={}{}&rental_car=exclude_rental".format(brand_id,
                                                                                            city_str)
     elif brand_id:
-        done_url = "https://sberauto.com/cars?brand={}&rental_car=exclude_rental".format(brand_id)
+        done_url = "https://sberauto.com/app/cars?brand={}&rental_car=exclude_rental".format(brand_id)
     else:
-        done_url = "https://sberauto.com/cars?"
+        done_url = "https://sberauto.com/app/cars?"
     if year_to or year_from:
         if year_to and year_from:
             done_url = done_url + "&dateTo={}&dateFrom={}".format(year_to, year_from)
