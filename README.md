@@ -21,14 +21,14 @@ ps данных шаг требуется для деплоя проекта
 Можно использовать postman
 запрос
 ```
-localhost:8080/getnearesttoken/
+http://0.0.0.0:8080/get-search-res-from-yandex/
 ```
 Внутри запроса должен лежать json вида:
 ```
 {
-    "MESSAGE_NAME": "GET_DUCKLING_RESULT",
+    "MESSAGE_NAME": "GET_DUCKLING_RESULT", 
     "data": {
-        "text": "лалалал"
+        "text": "хочу бмв 3 в москве"
     }
 }
 ```
@@ -41,16 +41,19 @@ localhost:8080/getnearesttoken/
     "STATUS": true,
     "PAYLOAD": {
         "result": {
-            "min_price": 17170436,
-            "max_price": 887000,
-            "count": 100,
-            "url": "https://sberauto.com/cars?brand=48&city=1&rental_car=exclude_rental"
+            "min_price": 247000,
+            "median": 3464899,
+            "max_price": 6585100,
+            "count": 154,
+            "url": "https://sberauto.com/app/cars?brand=48=model=591&rental_car=exclude_rental&city=1"
         },
         "description": "OK"
     }
 }
 ```
+## Логирование
 
+В качесте логера используется tlg
 
 
 

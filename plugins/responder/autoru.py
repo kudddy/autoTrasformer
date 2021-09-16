@@ -1,25 +1,32 @@
 from json import dumps
-
-from aiohttp_requests import requests
-
+from aiohttp_requests import requests as async_req
+from requests import request
 
 from plugins.config import cfg
 from plugins.loader import marks, models, citys
 from plugins.helper import is_true
-from persistants.request_info import headers_auto_ru, mixer_headers_auto_ru
+from persistants.request_info import mixer_headers_auto_ru
 
 url_auto_ru: str = cfg.app.url.autoru
 
 
 async def get_resp_from_yandex_systems(payload: dict):
-    response = await requests.post(url_auto_ru,
-                                   headers=mixer_headers_auto_ru(),
-                                   data=dumps(payload),
-                                   ssl=False)
 
-    d = await response.json()
+    # Почему то sberauto отбрасывает асинхронные запросы
+    use_async_mod: bool = False
 
-    return d
+    if use_async_mod:
+        response = await async_req.post(url_auto_ru,
+                                        headers=mixer_headers_auto_ru(),
+                                        data=dumps(payload),
+                                        ssl=False)
+        return await response.json()
+
+    else:
+
+        response = request("POST", url_auto_ru, headers=mixer_headers_auto_ru(), data=dumps(payload))
+
+        return response.json()
 
 
 async def get_search_res_yandex(text: str):
