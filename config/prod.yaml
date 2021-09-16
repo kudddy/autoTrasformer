@@ -2,10 +2,15 @@ app:
   main:
     host: 0.0.0.0
     port: 8080
+    redirect_to_mobile: True
+    use_tlg_logger: True
   directory:
     model_path: persistant/w2v/model_hh_fasttext
     stop_words_path: persistant/stopwords.txt
   url:
     sberautogetcars: https://api.sberauto.com/searcher/getCars
     autoru: https://auto.ru/-/ajax/desktop/searchlineSuggest/
+    sberautomainweb: https://sberauto.com/cars
+    sberautomainios: https://sberauto.onelink.me/RBOE/applisting
+    tlg: https://api.telegram.org/bot1970336189:AAGgyNk995DtkqunTE6fVtUHzNBo_G4D51M/sendMessage
   token: ad7f8ba8-000b-11ec-9a03-0242ac130003

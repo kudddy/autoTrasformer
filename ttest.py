@@ -1,0 +1,6 @@
+
+
+res: int
+
+
+print(res)

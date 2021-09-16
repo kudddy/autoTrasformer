@@ -5,3 +5,4 @@ pyyaml
 asyncpg~=0.22.0
 aiohttp-requests
 asynctest~=0.13.0
+requests
